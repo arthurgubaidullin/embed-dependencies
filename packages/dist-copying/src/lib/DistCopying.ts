@@ -1,26 +1,20 @@
-import * as path from 'node:path';
-import * as fs from 'node:fs/promises';
+import * as E from 'fp-ts/Either';
 import { constVoid, pipe } from 'fp-ts/lib/function';
 import * as T from 'fp-ts/Task';
 import * as TE from 'fp-ts/TaskEither';
-import * as E from 'fp-ts/Either';
+import * as fs from 'node:fs/promises';
 
-export async function copyDist(
-  cwd: string,
-  targetPath: string,
-  projectName: string
-) {
-  const dist = path.join(cwd, 'dist', 'packages', projectName);
-  const target = path.join(cwd, targetPath, projectName);
+export function copyDist(distPath: string, targetPath: string): T.Task<void> {
+  const dist = distPath;
+  const target = targetPath;
 
-  return await pipe(
+  return pipe(
     statExists(target),
     T.chain((exists) =>
       exists ? rm(target, { recursive: true }) : T.fromIO(constVoid)
     ),
     T.chain(() => mkdir(target, { recursive: true })),
-    T.chain(() => cp(dist, target, { recursive: true })),
-    (t) => t()
+    T.chain(() => cp(dist, target, { recursive: true }))
   );
 }
 
