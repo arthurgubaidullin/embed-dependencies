@@ -7,7 +7,7 @@
     "e2e": {
       "executor": "@nrwl/nx-plugin:e2e",
       "options": {
-        "target": "embed-dependencies:build",
+        "target": "embed-dependencies:embed-dependencies",
         "jestConfig": "packages/embed-dependencies-e2e/jest.config.ts"
       }
     }
