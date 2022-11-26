@@ -15,6 +15,9 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@embed-dependencies/dist-copying": [
+        "packages/dist-copying/src/index.ts"
+      ],
       "@embed-dependencies/embed-dependencies": [
         "packages/embed-dependencies/src/index.ts"
       ]
