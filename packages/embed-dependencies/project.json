@@ -55,6 +55,14 @@
         "jestConfig": "packages/embed-dependencies/jest.config.ts",
         "passWithNoTests": true
       }
+    },
+    "embed-dependencies": {
+      "executor": "@embed-dependencies/embed-dependencies:embed-dependencies",
+      "outputs": ["{workspaceRoot}/dist-with-deps/{projectRoot}"],
+      "options": {
+        "jestConfig": "packages/embed-dependencies/jest.config.ts",
+        "passWithNoTests": true
+      }
     }
   },
   "tags": []
