@@ -1,0 +1,61 @@
+{
+  "name": "embed-dependencies",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/embed-dependencies/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/packages/embed-dependencies",
+        "main": "packages/embed-dependencies/src/index.ts",
+        "tsConfig": "packages/embed-dependencies/tsconfig.lib.json",
+        "assets": [
+          "packages/embed-dependencies/*.md",
+          {
+            "input": "./packages/embed-dependencies/src",
+            "glob": "**/!(*.ts)",
+            "output": "./src"
+          },
+          {
+            "input": "./packages/embed-dependencies/src",
+            "glob": "**/*.d.ts",
+            "output": "./src"
+          },
+          {
+            "input": "./packages/embed-dependencies",
+            "glob": "generators.json",
+            "output": "."
+          },
+          {
+            "input": "./packages/embed-dependencies",
+            "glob": "executors.json",
+            "output": "."
+          }
+        ]
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "packages/embed-dependencies/**/*.ts",
+          "packages/embed-dependencies/generators.json",
+          "packages/embed-dependencies/executors.json",
+          "packages/embed-dependencies/package.json"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "packages/embed-dependencies/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}

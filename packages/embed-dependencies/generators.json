@@ -1,0 +1,12 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "name": "embed-dependencies",
+  "version": "0.0.1",
+  "generators": {
+    "embed-dependencies": {
+      "factory": "./src/generators/embed-dependencies/generator",
+      "schema": "./src/generators/embed-dependencies/schema.json",
+      "description": "embed-dependencies generator"
+    }
+  }
+}
