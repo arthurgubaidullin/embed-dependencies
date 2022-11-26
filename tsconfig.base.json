@@ -15,6 +15,9 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@embed-dependencies/deps-injecting": [
+        "packages/deps-injecting/src/index.ts"
+      ],
       "@embed-dependencies/dist-copying": [
         "packages/dist-copying/src/index.ts"
       ],
