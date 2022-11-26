@@ -24,7 +24,9 @@ export function publishPackage(
     }),
     IO.chain((storeFolder) => () => {
       return pipe(
-        execSync(`npx yalc publish --store-folder=${storeFolder} --changed`),
+        execSync(
+          `npx yalc publish --store-folder=${storeFolder} --changed --quiet`
+        ),
         String
       );
     }),
