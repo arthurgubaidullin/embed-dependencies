@@ -8,6 +8,7 @@
       "executor": "@nrwl/js:tsc",
       "outputs": ["{options.outputPath}"],
       "options": {
+        "buildableProjectDepsInPackageJsonType": "dependencies",
         "outputPath": "dist/packages/embed-dependencies",
         "main": "packages/embed-dependencies/src/index.ts",
         "tsConfig": "packages/embed-dependencies/tsconfig.lib.json",
