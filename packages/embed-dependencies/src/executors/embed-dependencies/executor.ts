@@ -14,7 +14,9 @@ const TARGET_DIST = 'dist-with-deps';
 export default async function runExecutor(
   options: EmbedDependenciesExecutorSchema,
   context: ExecutorContext
-) {
+): Promise<{
+  success: boolean;
+}> {
   console.log('Executor ran for EmbedDependencies', options);
   const sourcePath = join(context.cwd, SOURCE_DIST, context.projectName);
   const targetPath = join(context.cwd, TARGET_DIST, context.projectName);
