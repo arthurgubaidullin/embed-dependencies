@@ -1,4 +1,10 @@
 {
   "$schema": "http://json-schema.org/schema",
-  "executors": {}
+  "executors": {
+    "embed-dependencies": {
+      "implementation": "./src/executors/embed-dependencies/executor",
+      "schema": "./src/executors/embed-dependencies/schema.json",
+      "description": "Embeds dependencies inside the node package"
+    }
+  }
 }
