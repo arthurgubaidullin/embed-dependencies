@@ -11,8 +11,8 @@ import { addPackage, publishPackage } from '@embed-dependencies/yalc-client';
 export function injectDependencies(
   context: ExecutorContext,
   targetPackage: string
-) {
-  pipe(
+): IO.IO<void> {
+  return pipe(
     getDistDependencies(context),
     RA.map((a) =>
       pipe(
@@ -27,8 +27,7 @@ export function injectDependencies(
         console.error(e);
       },
       IO.of
-    ),
-    (io) => io()
+    )
   );
 }
 
