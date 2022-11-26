@@ -23,7 +23,8 @@
       ],
       "@embed-dependencies/embed-dependencies": [
         "packages/embed-dependencies/src/index.ts"
-      ]
+      ],
+      "@embed-dependencies/yalc-client": ["packages/yalc-client/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
