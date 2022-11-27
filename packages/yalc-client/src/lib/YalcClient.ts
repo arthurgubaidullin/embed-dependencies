@@ -1,8 +1,8 @@
 import { execSync } from 'child_process';
 import { pipe } from 'fp-ts/function';
-import * as E from 'fp-ts/lib/Either';
-import * as IO from 'fp-ts/lib/IO';
-import * as IOE from 'fp-ts/lib/IOEither';
+import * as E from 'fp-ts/Either';
+import * as IO from 'fp-ts/IO';
+import * as IOE from 'fp-ts/IOEither';
 import { join } from 'node:path';
 
 interface CWD {

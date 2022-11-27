@@ -1,5 +1,5 @@
 import * as E from 'fp-ts/Either';
-import { constVoid, pipe } from 'fp-ts/lib/function';
+import { constVoid, pipe } from 'fp-ts/function';
 import * as T from 'fp-ts/Task';
 import * as TE from 'fp-ts/TaskEither';
 import * as fs from 'node:fs/promises';

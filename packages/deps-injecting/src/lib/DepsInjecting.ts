@@ -4,17 +4,17 @@ import {
   ProjectGraphProjectNode,
 } from '@nrwl/devkit';
 import { identity, pipe } from 'fp-ts/function';
-import * as IO from 'fp-ts/lib/IO';
-import * as IOE from 'fp-ts/lib/IOEither';
-import * as O from 'fp-ts/lib/Option';
+import * as IO from 'fp-ts/IO';
+import * as IOE from 'fp-ts/IOEither';
+import * as O from 'fp-ts/Option';
 import * as RA from 'fp-ts/ReadonlyArray';
 import * as RS from 'fp-ts/ReadonlySet';
 import * as S from 'fp-ts/string';
 import * as path from 'path';
 import { getPackageName } from '@embed-dependencies/package-json';
 import { addPackage, publishPackage } from '@embed-dependencies/yalc-client';
-import { Eq, eqStrict } from 'fp-ts/lib/Eq';
-import * as Ord from 'fp-ts/lib/Ord';
+import { Eq, eqStrict } from 'fp-ts/Eq';
+import * as Ord from 'fp-ts/Ord';
 
 export function injectDependencies(
   context: ExecutorContext,

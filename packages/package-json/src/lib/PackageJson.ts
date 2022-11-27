@@ -1,13 +1,13 @@
 import { flow, pipe } from 'fp-ts/function';
-import * as Json from 'fp-ts/lib/Json';
-import * as IO from 'fp-ts/lib/IO';
-import * as IOE from 'fp-ts/lib/IOEither';
+import * as Json from 'fp-ts/Json';
+import * as IO from 'fp-ts/IO';
+import * as IOE from 'fp-ts/IOEither';
 import { join } from 'path';
 import { readFileSync, writeFileSync } from 'fs';
 import * as t from 'io-ts';
 import { failure } from 'io-ts/PathReporter';
-import * as E from 'fp-ts/lib/Either';
-import * as Record from 'fp-ts/lib/Record';
+import * as E from 'fp-ts/Either';
+import * as Record from 'fp-ts/Record';
 import * as A from 'fp-ts/Array';
 import * as S from 'fp-ts/string';
 
