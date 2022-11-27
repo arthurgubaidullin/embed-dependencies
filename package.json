@@ -22,6 +22,7 @@
     "@typescript-eslint/parser": "^5.36.1",
     "eslint": "~8.15.0",
     "eslint-config-prettier": "8.1.0",
+    "eslint-plugin-fp-ts": "^0.3.2",
     "jest": "28.1.1",
     "jest-environment-jsdom": "28.1.1",
     "jsonc-eslint-parser": "^2.1.0",
