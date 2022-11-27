@@ -19,7 +19,6 @@ export default async function runExecutor(
 ): Promise<{
   success: boolean;
 }> {
-  console.log('Executor ran for EmbedDependencies', options);
   const sourcePath = join(context.cwd, SOURCE_DIST, context.projectName);
   const targetPath = join(context.cwd, TARGET_DIST, context.projectName);
 
