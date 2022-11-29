@@ -14,7 +14,7 @@ Using npm:
 
 Add a target to `project.json` to the library you want to build with dependencies.
 
-```json
+```jsonc
 {
   // ...
   "targets": {
@@ -35,7 +35,7 @@ Add a target to `project.json` to the library you want to build with dependencie
 
 Also update your `nx.json`.
 
-```json
+```jsonc
 {
   // ...
   "targetDefaults": {
