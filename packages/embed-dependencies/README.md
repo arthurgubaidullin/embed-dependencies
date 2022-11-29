@@ -1,11 +1,53 @@
-# embed-dependencies
+# nx-embed-dependencies
 
-This library was generated with [Nx](https://nx.dev).
+This plugin for [Nx](https://nx.dev) helps injecting local dependencies into a package.
 
-## Building
+## Getting started
 
-Run `nx build embed-dependencies` to build the library.
+### Install
 
-## Running unit tests
+Using npm:
 
-Run `nx test embed-dependencies` to execute the unit tests via [Jest](https://jestjs.io).
+`npm install @arthurgubaidullin/embed-dependencies --save-dev`
+
+### Configure project
+
+Add a target to `project.json` to the library you want to build with dependencies.
+
+```json
+{
+  // ...
+  "targets": {
+    // ...
+    "embed-dependencies": {
+      "executor": "@arthurgubaidullin/nx-embed-dependencies:run",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist-with-deps/embed-dependencies"
+      }
+    }
+  }
+  // ...
+}
+```
+
+### Configure Nx pipeline
+
+Also update your `nx.json`.
+
+```json
+{
+  // ...
+  "targetDefaults": {
+    // ...
+    "embed-dependencies": {
+      "dependsOn": ["build"]
+      // ...
+    }
+  }
+}
+```
+
+## License
+
+MIT.
