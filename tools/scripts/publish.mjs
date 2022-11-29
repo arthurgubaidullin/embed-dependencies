@@ -1,3 +1,5 @@
+// @ts-check
+
 /**
  * This is a minimal script to publish your package to "npm".
  * This is meant to be used as-is or customize as you see fit.
@@ -12,6 +14,13 @@ import { execSync } from 'child_process';
 import { readFileSync, writeFileSync } from 'fs';
 import chalk from 'chalk';
 
+const DEFAULT_TAG = 'next';
+
+/**
+ *
+ * @param {unknown} condition
+ * @param {string} message
+ */
 function invariant(condition, message) {
   if (!condition) {
     console.error(chalk.bold.red(message));
@@ -21,7 +30,7 @@ function invariant(condition, message) {
 
 // Executing publish script: node path/to/publish.mjs {name} --version {version} --tag {tag}
 // Default "tag" to "next" so we won't publish the "latest" tag by accident.
-const [, , name, version, tag = 'next'] = process.argv;
+const [, , name, version, tag] = process.argv;
 
 // A simple SemVer validation to validate the version
 const validVersion = /^\d+\.\d+\.\d+(-\w+\.\d+)?/;
@@ -38,7 +47,8 @@ invariant(
   `Could not find project "${name}" in the workspace. Is the project.json configured correctly?`
 );
 
-const outputPath = project.data?.targets?.build?.options?.outputPath;
+const outputPath =
+  project.data?.targets?.['embed-dependencies']?.options?.outputPath;
 invariant(
   outputPath,
   `Could not find "build.options.outputPath" of project "${name}". Is project.json configured  correctly?`
@@ -58,4 +68,6 @@ try {
 }
 
 // Execute "npm publish" to publish
-execSync(`npm publish --access public --tag ${tag}`);
+execSync(
+  `npm publish --access public --tag ${tag === 'undefined' ? DEFAULT_TAG : tag}`
+);
