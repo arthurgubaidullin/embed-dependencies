@@ -1,1 +1,3 @@
-export interface EmbedDependenciesExecutorSchema {} // eslint-disable-line
+export interface EmbedDependenciesExecutorSchema {
+  outputPath: string;
+}

@@ -5,6 +5,10 @@
   "title": "EmbedDependencies executor",
   "description": "",
   "type": "object",
-  "properties": {},
-  "required": []
+  "properties": {
+    "outputPath": {
+      "type": "string"
+    }
+  },
+  "required": ["outputPath"]
 }
