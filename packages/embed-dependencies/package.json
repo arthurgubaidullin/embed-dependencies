@@ -3,5 +3,22 @@
   "version": "0.0.1",
   "main": "src/index.js",
   "generators": "./generators.json",
-  "executors": "./executors.json"
+  "executors": "./executors.json",
+  "keywords": [
+    "nx",
+    "plugin",
+    "dependencies"
+  ],
+  "author": {
+    "name": "Arthur Gubaidullin",
+    "email": "arthur.g.dev@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/arthurgubaidullin/embed-dependencies.git"
+  },
+  "bugs": {
+    "url": "https://github.com/arthurgubaidullin/embed-dependencies/issues"
+  },
+  "license": "MIT"
 }
