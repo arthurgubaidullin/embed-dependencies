@@ -21,7 +21,7 @@
       "@embed-dependencies/dist-copying": [
         "packages/dist-copying/src/index.ts"
       ],
-      "@embed-dependencies/embed-dependencies": [
+      "@arthurgubaidullin/nx-embed-dependencies": [
         "packages/embed-dependencies/src/index.ts"
       ],
       "@embed-dependencies/package-json": [

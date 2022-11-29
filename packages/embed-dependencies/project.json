@@ -58,7 +58,7 @@
       }
     },
     "embed-dependencies": {
-      "executor": "@embed-dependencies/embed-dependencies:run",
+      "executor": "@arthurgubaidullin/nx-embed-dependencies:run",
       "outputs": ["{options.outputPath}"],
       "options": {
         "outputPath": "dist-with-deps/packages/embed-dependencies",
