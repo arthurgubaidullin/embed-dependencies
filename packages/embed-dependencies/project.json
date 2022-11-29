@@ -65,6 +65,13 @@
         "jestConfig": "packages/embed-dependencies/jest.config.ts",
         "passWithNoTests": true
       }
+    },
+    "publish": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "node tools/scripts/publish.mjs embed-dependencies {args.ver} {args.tag}"
+      },
+      "dependsOn": ["embed-dependencies"]
     }
   },
   "tags": []
