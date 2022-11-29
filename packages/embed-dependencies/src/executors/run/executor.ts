@@ -11,7 +11,6 @@ import { join } from 'node:path';
 import { EmbedDependenciesExecutorSchema } from './schema';
 
 const SOURCE_DIST = 'dist/packages';
-const TARGET_DIST = 'dist-with-deps';
 
 export default async function runExecutor(
   options: EmbedDependenciesExecutorSchema,
@@ -20,7 +19,7 @@ export default async function runExecutor(
   success: boolean;
 }> {
   const sourcePath = join(context.cwd, SOURCE_DIST, context.projectName);
-  const targetPath = join(context.cwd, TARGET_DIST, context.projectName);
+  const targetPath = join(context.cwd, options.outputPath);
 
   return await pipe(
     copyDist(sourcePath, targetPath),
