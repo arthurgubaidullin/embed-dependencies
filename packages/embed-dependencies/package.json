@@ -5,9 +5,9 @@
   "generators": "./generators.json",
   "executors": "./executors.json",
   "keywords": [
-    "nx",
-    "plugin",
-    "dependencies"
+    "Nx",
+    "Plugin",
+    "Dependencies"
   ],
   "author": {
     "name": "Arthur Gubaidullin",
