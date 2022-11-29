@@ -61,9 +61,7 @@
       "executor": "@arthurgubaidullin/nx-embed-dependencies:run",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist-with-deps/embed-dependencies",
-        "jestConfig": "packages/embed-dependencies/jest.config.ts",
-        "passWithNoTests": true
+        "outputPath": "dist-with-deps/embed-dependencies"
       }
     },
     "publish": {
