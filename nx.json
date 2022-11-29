@@ -27,7 +27,7 @@
       "inputs": ["default", "^production", "{workspaceRoot}/jest.preset.js"]
     },
     "embed-dependencies": {
-      "dependsOn": ["^build"],
+      "dependsOn": ["build"],
       "inputs": ["production", "^production"]
     }
   },
