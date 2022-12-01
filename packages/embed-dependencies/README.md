@@ -8,7 +8,7 @@ This plugin for [Nx](https://nx.dev) helps injecting local dependencies into a p
 
 Using npm:
 
-`npm install @arthurgubaidullin/embed-dependencies --save-dev`
+`npm install @arthurgubaidullin/nx-embed-dependencies --save-dev`
 
 ### Configure project
 
@@ -23,7 +23,7 @@ Add a target to `project.json` to the library you want to build with dependencie
       "executor": "@arthurgubaidullin/nx-embed-dependencies:run",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist-with-deps/embed-dependencies"
+        "outputPath": "dist-with-deps/project-with-dependencies"
       }
     }
   }
