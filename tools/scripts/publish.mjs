@@ -28,16 +28,10 @@ function invariant(condition, message) {
   }
 }
 
-// Executing publish script: node path/to/publish.mjs {name} --version {version} --tag {tag}
+// Executing publish script: node path/to/publish.mjs {name} --tag {tag}
 // Default "tag" to "next" so we won't publish the "latest" tag by accident.
-const [, , name, version, tag] = process.argv;
-
-// A simple SemVer validation to validate the version
-const validVersion = /^\d+\.\d+\.\d+(-\w+\.\d+)?/;
-invariant(
-  version && validVersion.test(version),
-  `No version provided or version did not match Semantic Versioning, expected: #.#.#-tag.# or #.#.#, got ${version}.`
-);
+const [, , name, tag] = process.argv;
+let version;
 
 const graph = readCachedProjectGraph();
 const project = graph.nodes[name];
@@ -46,6 +40,15 @@ invariant(
   project,
   `Could not find project "${name}" in the workspace. Is the project.json configured correctly?`
 );
+
+try {
+  const json = JSON.parse(readFileSync(`package.json`).toString());
+  version = json.version;
+} catch (error) {
+  console.error(
+    chalk.bold.red(`Error reading package.json file from workspace.`)
+  );
+}
 
 const outputPath =
   project.data?.targets?.['embed-dependencies']?.options?.outputPath;
