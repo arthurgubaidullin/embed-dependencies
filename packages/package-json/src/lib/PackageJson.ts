@@ -1,24 +1,30 @@
+import * as A from 'fp-ts/Array';
+import * as RA from 'fp-ts/ReadonlyArray';
+import * as E from 'fp-ts/Either';
 import { flow, pipe } from 'fp-ts/function';
-import * as Json from 'fp-ts/Json';
 import * as IO from 'fp-ts/IO';
 import * as IOE from 'fp-ts/IOEither';
-import { join } from 'path';
+import * as Json from 'fp-ts/Json';
+import * as Record from 'fp-ts/Record';
+import * as S from 'fp-ts/string';
 import { readFileSync, writeFileSync } from 'fs';
 import * as t from 'io-ts';
 import { failure } from 'io-ts/PathReporter';
-import * as E from 'fp-ts/Either';
-import * as Record from 'fp-ts/Record';
-import * as A from 'fp-ts/Array';
-import * as S from 'fp-ts/string';
+import { join } from 'path';
 
 type PackageJson = t.TypeOf<typeof PackageJson>;
 
 const PackageJson = t.readonly(
-  t.type({
-    name: t.string,
-    peerDependencies: t.record(t.string, t.string),
-    dependencies: t.record(t.string, t.string),
-  })
+  t.intersection([
+    t.type({
+      name: t.string,
+      peerDependencies: t.record(t.string, t.string),
+      dependencies: t.record(t.string, t.string),
+    }),
+    t.partial({
+      bundledDependencies: t.readonlyArray(t.string),
+    }),
+  ])
 );
 
 export function _removePeerDependencies(
@@ -32,9 +38,17 @@ export function _removePeerDependencies(
   );
 }
 
-function _removePeerDependencyDuplucates(
-  packageJson: PackageJson
-): PackageJson {
+function updateBundledDependencies(packageJson: PackageJson): PackageJson {
+  return pipe(
+    packageJson.dependencies,
+    Record.keys,
+    RA.filter((k) => packageJson.dependencies[k].startsWith('file:')),
+    RA.concat(packageJson.bundledDependencies ?? []),
+    (bundledDependencies) => ({ ...packageJson, bundledDependencies })
+  );
+}
+
+function removePeerDependencyDuplucates(packageJson: PackageJson): PackageJson {
   return pipe(
     packageJson.dependencies,
     Record.keys,
@@ -47,12 +61,13 @@ function _removePeerDependencyDuplucates(
   );
 }
 
-export function removePeerDependencyDuplucates(
+export function fixPackageJson(
   pathToPackage: string
 ): IOE.IOEither<Error, string> {
   return pipe(
     readPackageJson(pathToPackage),
-    IOE.map((a) => _removePeerDependencyDuplucates(a)),
+    IOE.map((a) => removePeerDependencyDuplucates(a)),
+    IOE.map((a) => updateBundledDependencies(a)),
     IOE.chain((a) => writePackageJson(pathToPackage, a))
   );
 }

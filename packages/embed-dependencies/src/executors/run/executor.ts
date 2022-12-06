@@ -1,6 +1,6 @@
 import { injectDependencies } from '@embed-dependencies/deps-injecting';
 import { copyDist } from '@embed-dependencies/dist-copying';
-import { removePeerDependencyDuplucates } from '@embed-dependencies/package-json';
+import { fixPackageJson } from '@embed-dependencies/package-json';
 import { ExecutorContext } from '@nrwl/devkit';
 import { toError } from 'fp-ts/Either';
 import { pipe } from 'fp-ts/function';
@@ -24,7 +24,7 @@ export default async function runExecutor(
   return await pipe(
     copyDist(sourcePath, targetPath),
     T.chain(() => T.fromIO(injectDependencies(context, targetPath))),
-    T.chain(() => T.fromIO(removePeerDependencyDuplucates(targetPath))),
+    T.chain(() => T.fromIO(fixPackageJson(targetPath))),
     TE.chain(() =>
       TE.tryCatch(async () => {
         process.chdir(targetPath);
