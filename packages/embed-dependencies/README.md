@@ -48,6 +48,18 @@ Also update your `nx.json`.
 }
 ```
 
+## Caveats
+
+If you are using [grouped libraries](https://nx.dev/more-concepts/grouping-libraries), then their names must be valid.
+
+**Correct**
+
+`@workspace/commom-my-lib`
+
+**Incorrect**
+
+`@workspace/commom/my-lib`
+
 ## License
 
 MIT.
