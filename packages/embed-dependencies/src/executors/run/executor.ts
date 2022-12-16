@@ -10,15 +10,13 @@ import { execSync } from 'node:child_process';
 import { join } from 'node:path';
 import { EmbedDependenciesExecutorSchema } from './schema';
 
-const SOURCE_DIST = 'dist/packages';
-
 export default async function runExecutor(
   options: EmbedDependenciesExecutorSchema,
   context: ExecutorContext
 ): Promise<{
   success: boolean;
 }> {
-  const sourcePath = join(context.cwd, SOURCE_DIST, context.projectName);
+  const sourcePath = join(context.cwd, options.sourceDist, context.projectName);
   const targetPath = join(context.cwd, options.outputPath);
 
   return await pipe(
