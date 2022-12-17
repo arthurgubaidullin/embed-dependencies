@@ -23,7 +23,8 @@ Add a target to `project.json` to the library you want to build with dependencie
       "executor": "@arthurgubaidullin/nx-embed-dependencies:run",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist-with-deps/project-with-dependencies"
+        "outputPath": "dist/libs/lib-with-dependencies"
+        "sourceDist": "dist/libs"
       }
     }
   }
