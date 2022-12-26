@@ -23,8 +23,8 @@ Add a target to `project.json` to the library you want to build with dependencie
       "executor": "@arthurgubaidullin/nx-embed-dependencies:run",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/libs/lib-with-dependencies"
-        "sourceDist": "dist/libs"
+        "outputPath": "dist/packages/lib-with-dependencies",
+        "sourceDist": "dist/packages"
       }
     }
   }
@@ -60,6 +60,10 @@ If you are using [grouped libraries](https://nx.dev/more-concepts/grouping-libra
 **Incorrect**
 
 `@workspace/commom/my-lib`
+
+### Recomendation
+
+When creating a project in folder, use the `--importPath` option.
 
 ## License
 
