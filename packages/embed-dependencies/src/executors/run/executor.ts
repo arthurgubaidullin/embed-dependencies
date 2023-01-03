@@ -16,10 +16,19 @@ export default async function runExecutor(
 ): Promise<{
   success: boolean;
 }> {
+  return await pipe(pipeline(options, context), (t) => t());
+}
+
+function pipeline(
+  options: EmbedDependenciesExecutorSchema,
+  context: ExecutorContext
+): T.Task<{
+  success: boolean;
+}> {
   const sourcePath = join(context.cwd, options.sourceDist, context.projectName);
   const targetPath = join(context.cwd, options.outputPath);
 
-  return await pipe(
+  return pipe(
     copyDist(sourcePath, targetPath),
     time('copyDist', context),
     T.chain(() =>
@@ -47,11 +56,10 @@ export default async function runExecutor(
         (f) => TE.tryCatch(f, toError)
       )
     ),
-    TE.fold(
-      () => T.of({ success: false }),
-      () => T.of({ success: true })
-    ),
-    (t) => t()
+    TE.map(() => ({ success: true })),
+    TE.orElseFirstIOK((e) => () => console.error(e)),
+    TE.mapLeft(() => ({ success: false })),
+    TE.getOrElse(T.of)
   );
 }
 
