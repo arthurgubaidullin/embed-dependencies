@@ -6,7 +6,7 @@ import * as IOE from 'fp-ts/IOEither';
 import * as RA from 'fp-ts/ReadonlyArray';
 import { getPackageName } from '@embed-dependencies/package-json';
 import { addPackage, publishPackage } from '@embed-dependencies/yalc-client';
-import { getProjectDependencies } from './getProjectDependencies';
+import { getProjectDependencies } from '@embed-dependencies/project';
 
 export function injectDependencies(
   targetPackage: string
