@@ -1,0 +1,13 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "type": "npm",
+      "script": "build-with-deps",
+      "group": "build",
+      "problemMatcher": [],
+      "label": "npm: build",
+      "detail": "npx nx run-many --target=build"
+    }
+  ]
+}
