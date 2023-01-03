@@ -16,7 +16,8 @@ export default async function runExecutor(
     (rt) =>
       rt({
         context,
-        injectDependencies: (t) => T.fromIO(injectDependencies(context, t)),
+        injectDependencies: (t) =>
+          pipe(injectDependencies(t)({ context }), T.fromIO),
       }),
     (t) => t()
   );
