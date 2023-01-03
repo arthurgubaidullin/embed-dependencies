@@ -3,13 +3,14 @@ import { copyDist } from '@embed-dependencies/dist-copying';
 import { fixPackageJson } from '@embed-dependencies/package-json';
 import { ExecutorContext } from '@nrwl/devkit';
 import { toError } from 'fp-ts/Either';
-import { constVoid, pipe } from 'fp-ts/function';
+import { pipe } from 'fp-ts/function';
 import * as T from 'fp-ts/Task';
 import * as RT from 'fp-ts/ReaderTask';
 import * as TE from 'fp-ts/TaskEither';
 import { execSync } from 'node:child_process';
 import { join } from 'node:path';
 import { EmbedDependenciesExecutorSchema } from './schema';
+import { time } from './time';
 
 export default async function runExecutor(
   options: EmbedDependenciesExecutorSchema,
@@ -78,27 +79,4 @@ function pipeline(
       TE.getOrElse(T.of)
     );
   };
-}
-
-function time(
-  functionName: string,
-  options: Readonly<{ isVerbose: boolean }>
-): <A>(t: T.Task<A>) => T.Task<A> {
-  return (t) =>
-    pipe(
-      T.Do,
-      T.bind('before', () => T.fromIO(performance.now)),
-      T.bind('result', () => t),
-      T.bind('after', () => T.fromIO(performance.now)),
-      T.let('performance', ({ before, after }) => Math.floor(after - before)),
-      T.let(
-        'message',
-        ({ performance }) =>
-          `The \`${functionName}\` function took ${performance} milliseconds.`
-      ),
-      T.chainFirstIOK(({ message }) =>
-        options.isVerbose ? () => console.log(message) : constVoid
-      ),
-      T.map((a) => a.result)
-    );
 }
