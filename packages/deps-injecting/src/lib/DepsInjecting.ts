@@ -21,7 +21,7 @@ export function injectDependencies(
   targetPackage: string
 ): IO.IO<void> {
   return pipe(
-    getDistDependencies(context),
+    getProjectDependencies(context),
     RA.map((a) =>
       pipe(
         publishPackage(context, a),
@@ -39,7 +39,7 @@ export function injectDependencies(
   );
 }
 
-function getDistDependencies(context: ExecutorContext): readonly string[] {
+function getProjectDependencies(context: ExecutorContext): readonly string[] {
   const EqProjectGraphProjectNode = eqStrict as Eq<ProjectGraphProjectNode>;
   const OrdProjectGraphProjectNode = Ord.contramap(
     (a: ProjectGraphProjectNode) => a.name
