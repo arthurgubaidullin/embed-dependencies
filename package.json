@@ -2,7 +2,10 @@
   "name": "embed-dependencies",
   "version": "0.0.14",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "build": "npx nx run-many --target=build",
+    "build-with-deps": "npx nx run-many --target=embed-dependencies"
+  },
   "private": true,
   "devDependencies": {
     "@nrwl/cli": "15.2.1",
