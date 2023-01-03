@@ -10,9 +10,10 @@ import { execSync } from 'node:child_process';
 import { join } from 'node:path';
 import { EmbedDependenciesExecutorSchema } from './schema';
 import { time } from './time';
+import { getProjectDependencies } from '@embed-dependencies/project';
 
 export interface InjectDependencies {
-  (targetPackage: string): T.Task<void>;
+  (targetPackage: string, dependencies: readonly string[]): T.Task<void>;
 }
 
 export function pipeline(
@@ -33,7 +34,7 @@ export function pipeline(
       time('copyDist', P.context),
       T.chain(() =>
         pipe(
-          P.injectDependencies(targetPath),
+          P.injectDependencies(targetPath, getProjectDependencies(P.context)),
           time('injectDependencies', P.context)
         )
       ),
