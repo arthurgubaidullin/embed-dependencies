@@ -19,14 +19,25 @@ export default async function runExecutor(
 }> {
   return await pipe(
     pipeline(options),
-    (rt) => rt({ context }),
+    (rt) =>
+      rt({
+        context,
+        injectDependencies: (t) => T.fromIO(injectDependencies(context, t)),
+      }),
     (t) => t()
   );
 }
 
+export interface InjectDependencies {
+  (targetPackage: string): T.Task<void>;
+}
+
 function pipeline(
   options: EmbedDependenciesExecutorSchema
-): RT.ReaderTask<{ context: ExecutorContext }, { success: boolean }> {
+): RT.ReaderTask<
+  { context: ExecutorContext; injectDependencies: InjectDependencies },
+  { success: boolean }
+> {
   return (P) => {
     const sourcePath = join(
       P.context.cwd,
@@ -39,8 +50,7 @@ function pipeline(
       time('copyDist', P.context),
       T.chain(() =>
         pipe(
-          injectDependencies(P.context, targetPath),
-          T.fromIO,
+          P.injectDependencies(targetPath),
           time('injectDependencies', P.context)
         )
       ),
