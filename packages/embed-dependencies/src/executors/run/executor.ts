@@ -1,4 +1,5 @@
-import { injectDependencies } from '@embed-dependencies/deps-injecting';
+import * as npmPackInjector from '@embed-dependencies/npm-pack-injector';
+import * as yalcInjector from '@embed-dependencies/deps-injecting';
 import { ExecutorContext } from '@nrwl/devkit';
 import { pipe } from 'fp-ts/function';
 import * as T from 'fp-ts/Task';
@@ -16,8 +17,19 @@ export default async function runExecutor(
     (rt) =>
       rt({
         context,
-        injectDependencies: (a, b) =>
-          pipe(injectDependencies(a, b), (f) => f({ context }), T.fromIO),
+        injectDependencies: pipe(
+          options.injector === 'npm-pack'
+            ? (a, b) =>
+                pipe(npmPackInjector.injectDependencies(a, b), (f) =>
+                  f({ context })
+                )
+            : (a, b) =>
+                pipe(
+                  yalcInjector.injectDependencies(a, b),
+                  (f) => f({ context }),
+                  T.fromIO
+                )
+        ),
       }),
     (t) => t()
   );
