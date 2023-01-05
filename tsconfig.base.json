@@ -24,6 +24,9 @@
       "@embed-dependencies/dist-copying": [
         "packages/dist-copying/src/index.ts"
       ],
+      "@embed-dependencies/npm-pack-injector": [
+        "packages/npm-pack-injector/src/index.ts"
+      ],
       "@embed-dependencies/package-json": [
         "packages/package-json/src/index.ts"
       ],
