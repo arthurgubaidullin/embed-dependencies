@@ -1,10 +1,10 @@
 import * as A from 'fp-ts/Array';
-import * as RA from 'fp-ts/ReadonlyArray';
 import * as E from 'fp-ts/Either';
-import { flow, pipe } from 'fp-ts/function';
+import { constVoid, flow, pipe } from 'fp-ts/function';
 import * as IO from 'fp-ts/IO';
 import * as IOE from 'fp-ts/IOEither';
 import * as Json from 'fp-ts/Json';
+import * as RA from 'fp-ts/ReadonlyArray';
 import * as Record from 'fp-ts/Record';
 import * as S from 'fp-ts/string';
 import { readFileSync, writeFileSync } from 'fs';
@@ -13,6 +13,8 @@ import { failure } from 'io-ts/PathReporter';
 import { join } from 'path';
 
 type PackageJson = t.TypeOf<typeof PackageJson>;
+
+type Dependencies = readonly Readonly<{ name: string; path: string }>[];
 
 const PackageJson = t.readonly(
   t.intersection([
@@ -37,6 +39,22 @@ export function _removePeerDependencies(
     (peerDependencies) => ({ ...packageJson, peerDependencies })
   );
 }
+function _insertDependencies(
+  deps: Dependencies
+): (packageJson: PackageJson) => PackageJson {
+  return (packageJson) =>
+    pipe(
+      deps,
+      RA.reduce({} as { [k: string]: string }, (b, a) => ({
+        ...b,
+        [a.name]: a.path,
+      })),
+      (deps) => ({
+        ...packageJson,
+        dependencies: { ...packageJson.dependencies, ...deps },
+      })
+    );
+}
 
 function updateBundledDependencies(packageJson: PackageJson): PackageJson {
   return pipe(
@@ -59,6 +77,20 @@ function removePeerDependencyDuplucates(packageJson: PackageJson): PackageJson {
     ),
     A.reduce(packageJson, (acc, v) => v(acc))
   );
+}
+
+export function insertDependencies(
+  pathToPackage: string
+): (
+  deps: readonly Readonly<{ name: string; path: string }>[]
+) => IOE.IOEither<Error, void> {
+  return (deps) =>
+    pipe(
+      readPackageJson(pathToPackage),
+      IOE.map(_insertDependencies(deps)),
+      IOE.chain((a) => writePackageJson(pathToPackage, a)),
+      IOE.map(constVoid)
+    );
 }
 
 export function fixPackageJson(
