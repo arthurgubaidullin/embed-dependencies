@@ -1,7 +1,7 @@
 /* eslint-disable */
 export default {
-  displayName: 'package-json',
-  preset: '../../jest.preset.js',
+  displayName: 'package-json-space-program',
+  preset: '../../../jest.preset.js',
   globals: {
     'ts-jest': {
       tsconfig: '<rootDir>/tsconfig.spec.json',
@@ -12,5 +12,5 @@ export default {
     '^.+\\.[tj]s$': 'ts-jest',
   },
   moduleFileExtensions: ['ts', 'js', 'html'],
-  coverageDirectory: '../../coverage/packages/package-json',
+  coverageDirectory: '../../../coverage/packages/package-json-space/program',
 };

@@ -1,7 +1,7 @@
 import {
   getPackageName,
   insertDependencies,
-} from '@embed-dependencies/package-json';
+} from '@embed-dependencies/package-json-program';
 import { ExecutorContext } from '@nrwl/devkit';
 import * as A from 'fp-ts/Array';
 import * as E from 'fp-ts/Either';

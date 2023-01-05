@@ -1,5 +1,5 @@
 import { copyDist } from '@embed-dependencies/dist-copying';
-import { fixPackageJson } from '@embed-dependencies/package-json';
+import { fixPackageJson } from '@embed-dependencies/package-json-program';
 import { ExecutorContext } from '@nrwl/devkit';
 import { toError } from 'fp-ts/Either';
 import { pipe } from 'fp-ts/function';

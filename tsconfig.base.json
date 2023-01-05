@@ -24,8 +24,8 @@
       "@embed-dependencies/npm-pack-injector": [
         "packages/npm-pack-injector/src/index.ts"
       ],
-      "@embed-dependencies/package-json": [
-        "packages/package-json/src/index.ts"
+      "@embed-dependencies/package-json-program": [
+        "packages/package-json-space/program/src/index.ts"
       ],
       "@embed-dependencies/project": ["packages/project/src/index.ts"],
       "@embed-dependencies/yalc-client": ["packages/yalc-client/src/index.ts"],

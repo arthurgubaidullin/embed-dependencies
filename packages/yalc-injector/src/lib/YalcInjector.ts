@@ -1,4 +1,4 @@
-import { getPackageName } from '@embed-dependencies/package-json';
+import { getPackageName } from '@embed-dependencies/package-json-program';
 import { addPackage, publishPackage } from '@embed-dependencies/yalc-client';
 import { ExecutorContext } from '@nrwl/devkit';
 import { pipe } from 'fp-ts/function';
