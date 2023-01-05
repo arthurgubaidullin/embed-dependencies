@@ -1,6 +1,6 @@
 /* eslint-disable */
 export default {
-  displayName: 'deps-injecting',
+  displayName: 'yalc-injector',
   preset: '../../jest.preset.js',
   globals: {
     'ts-jest': {
@@ -12,5 +12,5 @@ export default {
     '^.+\\.[tj]s$': 'ts-jest',
   },
   moduleFileExtensions: ['ts', 'js', 'html'],
-  coverageDirectory: '../../coverage/packages/deps-injecting',
+  coverageDirectory: '../../coverage/packages/yalc-injector',
 };

@@ -1,31 +1,31 @@
 {
-  "name": "deps-injecting",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "packages/deps-injecting/src",
+  "name": "yalc-injector",
+  "sourceRoot": "packages/yalc-injector/src",
   "projectType": "library",
   "targets": {
     "build": {
       "executor": "@nrwl/js:tsc",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/packages/deps-injecting",
-        "main": "packages/deps-injecting/src/index.ts",
-        "tsConfig": "packages/deps-injecting/tsconfig.lib.json",
-        "assets": ["packages/deps-injecting/*.md"]
+        "outputPath": "dist/packages/yalc-injector",
+        "main": "packages/yalc-injector/src/index.ts",
+        "tsConfig": "packages/yalc-injector/tsconfig.lib.json",
+        "assets": ["packages/yalc-injector/*.md"]
       }
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["packages/deps-injecting/**/*.ts"]
+        "lintFilePatterns": ["packages/yalc-injector/**/*.ts"]
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "packages/deps-injecting/jest.config.ts",
+        "jestConfig": "packages/yalc-injector/jest.config.ts",
         "passWithNoTests": true
       }
     }

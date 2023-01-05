@@ -1,5 +1,5 @@
 import * as npmPackInjector from '@embed-dependencies/npm-pack-injector';
-import * as yalcInjector from '@embed-dependencies/deps-injecting';
+import * as yalcInjector from '@embed-dependencies/yalc-injector';
 import { ExecutorContext } from '@nrwl/devkit';
 import { pipe } from 'fp-ts/function';
 import * as T from 'fp-ts/Task';

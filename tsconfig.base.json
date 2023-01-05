@@ -18,9 +18,6 @@
       "@arthurgubaidullin/nx-embed-dependencies": [
         "packages/embed-dependencies/src/index.ts"
       ],
-      "@embed-dependencies/deps-injecting": [
-        "packages/deps-injecting/src/index.ts"
-      ],
       "@embed-dependencies/dist-copying": [
         "packages/dist-copying/src/index.ts"
       ],
@@ -31,7 +28,10 @@
         "packages/package-json/src/index.ts"
       ],
       "@embed-dependencies/project": ["packages/project/src/index.ts"],
-      "@embed-dependencies/yalc-client": ["packages/yalc-client/src/index.ts"]
+      "@embed-dependencies/yalc-client": ["packages/yalc-client/src/index.ts"],
+      "@embed-dependencies/yalc-injector": [
+        "packages/yalc-injector/src/index.ts"
+      ]
     }
   },
   "exclude": ["node_modules", "tmp"]
