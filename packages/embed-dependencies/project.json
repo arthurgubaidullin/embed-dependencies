@@ -62,7 +62,8 @@
       "outputs": ["{options.outputPath}"],
       "options": {
         "outputPath": "dist-with-deps/embed-dependencies",
-        "sourceDist": "dist/packages"
+        "sourceDist": "dist/packages",
+        "injector": "npm-pack"
       }
     },
     "publish": {
