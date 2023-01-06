@@ -23,7 +23,11 @@ export function injectDependencies(
   return () =>
     pipe(
       TE.of(dependencyPaths),
-      TE.chain(TE.traverseArray((a) => pack(a, targetPackagePath))),
+      TE.chain(
+        TE.traverseArray((sourcePackagePath) =>
+          pack(sourcePackagePath, targetPackagePath)
+        )
+      ),
       TE.chainFirst(flow(insertDependencies(targetPackagePath), T.fromIO)),
       TE.map(constVoid),
       TE.fold(
