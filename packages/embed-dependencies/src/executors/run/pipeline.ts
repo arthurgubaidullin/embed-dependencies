@@ -1,16 +1,16 @@
 import { copyDist } from '@embed-dependencies/dist-copying';
 import { fixPackageJson } from '@embed-dependencies/package-json-program';
+import { getProjectDependencies } from '@embed-dependencies/project';
 import { ExecutorContext } from '@nrwl/devkit';
 import { toError } from 'fp-ts/Either';
 import { pipe } from 'fp-ts/function';
-import * as T from 'fp-ts/Task';
 import * as RT from 'fp-ts/ReaderTask';
+import * as T from 'fp-ts/Task';
 import * as TE from 'fp-ts/TaskEither';
 import { execSync } from 'node:child_process';
 import { join } from 'node:path';
 import { EmbedDependenciesExecutorSchema } from './schema';
 import { time } from './time';
-import { getProjectDependencies } from '@embed-dependencies/project';
 
 export interface InjectDependencies {
   (targetPackage: string, dependencies: readonly string[]): T.Task<void>;
@@ -25,8 +25,8 @@ export function pipeline(
   return (P) => {
     const sourcePath = join(
       P.context.cwd,
-      options.sourceDist,
-      P.context.projectName
+      P.context.workspace.projects[P.context.projectName].targets['build']
+        .options['outputPath']
     );
     const targetPath = join(P.context.cwd, options.outputPath);
     return pipe(

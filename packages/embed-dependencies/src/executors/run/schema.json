@@ -9,14 +9,11 @@
     "outputPath": {
       "type": "string"
     },
-    "sourceDist": {
-      "type": "string"
-    },
     "injector": {
       "type": "string",
       "anyOf": [{ "const": "yalc" }, { "const": "npm-pack" }],
       "default": "yalc"
     }
   },
-  "required": ["outputPath", "sourceDist"]
+  "required": ["outputPath"]
 }

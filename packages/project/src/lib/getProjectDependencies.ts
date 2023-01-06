@@ -50,7 +50,15 @@ export function getProjectDependencies(
       pipe(
         iter(projectGraph, projectName, new Set()),
         RS.toReadonlyArray(OrdProjectGraphProjectNode),
-        RA.map((a) => path.join(context.cwd, 'dist', a.data['root']))
+        RA.map((a) => {
+          const pathToBuild = context.workspace.projects[a.name].targets?.[
+            'build'
+          ].options['outputPath'] as string | undefined;
+          if (!pathToBuild) {
+            throw new Error(`Package \`${a.name}\` has no build output path.`);
+          }
+          return path.join(context.cwd, pathToBuild);
+        })
       )
     ),
     O.fold(() => [], identity)
