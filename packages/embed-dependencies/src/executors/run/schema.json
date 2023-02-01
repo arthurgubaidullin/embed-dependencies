@@ -12,7 +12,7 @@
     "injector": {
       "type": "string",
       "anyOf": [{ "const": "yalc" }, { "const": "npm-pack" }],
-      "default": "yalc"
+      "default": "npm-pack"
     }
   },
   "required": ["outputPath"]
