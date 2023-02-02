@@ -9,6 +9,7 @@ import * as Record from 'fp-ts/Record';
 import * as S from 'fp-ts/string';
 import { readFileSync, writeFileSync } from 'fs';
 import * as t from 'io-ts';
+import { withFallback } from 'io-ts-types';
 import { failure } from 'io-ts/PathReporter';
 import { join } from 'path';
 
@@ -20,8 +21,8 @@ const PackageJson = t.readonly(
   t.intersection([
     t.type({
       name: t.string,
-      peerDependencies: t.record(t.string, t.string),
-      dependencies: t.record(t.string, t.string),
+      peerDependencies: withFallback(t.record(t.string, t.string), {}),
+      dependencies: withFallback(t.record(t.string, t.string), {}),
     }),
     t.partial({
       bundledDependencies: t.readonlyArray(t.string),
@@ -107,8 +108,9 @@ export function fixPackageJson(
 function readPackageJson(
   pathToPackage: string
 ): IOE.IOEither<Error, PackageJson> {
+  const pathToPackageJson = join(pathToPackage, 'package.json');
   return pipe(
-    join(pathToPackage, 'package.json'),
+    pathToPackageJson,
     (a) => () => readFileSync(a),
     IO.map(String),
     IO.map(Json.parse),
@@ -117,7 +119,19 @@ function readPackageJson(
       flow(
         PackageJson.decode,
         E.mapLeft(failure),
-        E.mapLeft(() => new Error('Invalid package.json.')),
+        E.mapLeft(
+          (e) =>
+            new Error(
+              JSON.stringify(
+                {
+                  message: `Invalid package.json with path: \`${pathToPackageJson}\`.`,
+                  errors: e,
+                },
+                null,
+                2
+              )
+            )
+        ),
         IOE.fromEither
       )
     )
